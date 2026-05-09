@@ -16,7 +16,8 @@ export default {
             loading: false,
             error: '',
             quantidadeSenhas: 1,
-            geracaoLoading: false
+            geracaoLoading: false,
+            copyFeedback: ''
         };
     },
     async mounted() {
@@ -87,6 +88,25 @@ export default {
         },
         goBack() {
             this.$emit('back');
+        },
+        async copySenha(senha) {
+            try {
+                await navigator.clipboard.writeText(senha.senha);
+                this.copyFeedback = `Senha ${senha.senha} copiada!`;
+                setTimeout(() => { this.copyFeedback = ''; }, 2000);
+            } catch (err) {
+                console.error('Erro ao copiar:', err);
+            }
+        },
+        async copyAllSenhas() {
+            const allSenhas = this.senhas.map(s => s.senha).join('\n');
+            try {
+                await navigator.clipboard.writeText(allSenhas);
+                this.copyFeedback = `${this.senhas.length} senhas copiadas!`;
+                setTimeout(() => { this.copyFeedback = ''; }, 2000);
+            } catch (err) {
+                console.error('Erro ao copiar:', err);
+            }
         }
     }
 };
@@ -132,6 +152,17 @@ export default {
             As senhas possuem 8 caracteres alfanuméricos e são únicas no sistema.
         </p>
 
+        <div class="copy-all-section">
+            <button class="copy-all-btn" @click="copyAllSenhas" :disabled="senhas.length === 0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copiar Todas as Senhas
+            </button>
+            <span v-if="copyFeedback" class="copy-feedback">{{ copyFeedback }}</span>
+        </div>
+
         <div v-if="loading" class="loading">Carregando...</div>
 
         <table v-else class="senha-table">
@@ -147,8 +178,17 @@ export default {
                     <td class="senha-cell">{{ senha.senha }}</td>
                     <td>{{ new Date(senha.created_at).toLocaleDateString('pt-BR') }}</td>
                     <td class="actions">
+                        <button class="action-btn copy" @click="copySenha(senha)" title="Copiar senha">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
                         <button class="action-btn delete" @click="deleteSenha(senha)">
-                            Excluir
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
                         </button>
                     </td>
                 </tr>
@@ -270,8 +310,46 @@ export default {
 .info-text {
     font-size: 13px;
     color: #666;
-    margin: 0 0 20px 0;
+    margin: 0 0 12px 0;
     font-style: italic;
+}
+
+.copy-all-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.copy-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #2c5282;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2c5282;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.copy-all-btn:hover:not(:disabled) {
+    background: #ebf8ff;
+}
+
+.copy-all-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.copy-feedback {
+    font-size: 12px;
+    color: #28a745;
+    font-weight: 500;
 }
 
 .loading {
@@ -334,10 +412,28 @@ export default {
     background: #ffffff;
     border-color: #b00020;
     color: #b00020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
 }
 
 .action-btn.delete:hover {
     background: #fef2f2;
+}
+
+.action-btn.copy {
+    background: #ffffff;
+    border-color: #2c5282;
+    color: #2c5282;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.action-btn.copy:hover {
+    background: #ebf8ff;
 }
 
 .empty {
@@ -383,6 +479,16 @@ export default {
         justify-content: center;
     }
 
+    .copy-all-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .copy-all-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
     .senha-table {
         display: block;
         overflow-x: auto;
@@ -396,6 +502,10 @@ export default {
 
     .senha-cell {
         letter-spacing: 1px;
+    }
+
+    .actions {
+        flex-wrap: wrap;
     }
 }
 </style>
