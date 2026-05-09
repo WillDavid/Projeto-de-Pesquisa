@@ -56,7 +56,7 @@ export default {
         </div>
 
         <footer class="home-footer">
-            <p>Desenvolvido por Dinardi Enterprises</p>
+            <p>Desenvolvido por Dinardi Solucoes em Software</p>
         </footer>
     </div>
 </template>
