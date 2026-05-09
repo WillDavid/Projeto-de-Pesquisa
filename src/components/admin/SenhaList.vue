@@ -89,6 +89,14 @@ export default {
         goBack() {
             this.$emit('back');
         },
+        getStatus(senha) {
+            const opcoes = senha.formulario_opcoes_concluido;
+            const prefs = senha.formulario_preferencias_concluido;
+            if (opcoes && prefs) return { texto: 'Completo', classe: 'status-complete' };
+            if (opcoes) return { texto: 'Opcoes OK', classe: 'status-partial' };
+            if (prefs) return { texto: 'Prefs OK', classe: 'status-partial' };
+            return { texto: 'Pendente', classe: 'status-pending' };
+        },
         async copySenha(senha) {
             try {
                 await navigator.clipboard.writeText(senha.senha);
@@ -170,6 +178,7 @@ export default {
                 <tr>
                     <th>Senha</th>
                     <th>Data de Criação</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -177,6 +186,11 @@ export default {
                 <tr v-for="senha in senhas" :key="senha.id">
                     <td class="senha-cell">{{ senha.senha }}</td>
                     <td>{{ new Date(senha.created_at).toLocaleDateString('pt-BR') }}</td>
+                    <td>
+                        <span :class="['status-badge', getStatus(senha).classe]">
+                            {{ getStatus(senha).texto }}
+                        </span>
+                    </td>
                     <td class="actions">
                         <button class="action-btn copy" @click="copySenha(senha)" title="Copiar senha">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,7 +207,7 @@ export default {
                     </td>
                 </tr>
                 <tr v-if="senhas.length === 0">
-                    <td colspan="3" class="empty">Nenhuma senha cadastrada neste setor</td>
+                    <td colspan="4" class="empty">Nenhuma senha cadastrada neste setor</td>
                 </tr>
             </tbody>
         </table>
@@ -434,6 +448,34 @@ export default {
 
 .action-btn.copy:hover {
     background: #ebf8ff;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-complete {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #28a745;
+}
+
+.status-partial {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+.status-pending {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
 }
 
 .empty {
