@@ -61,7 +61,7 @@ export const perguntasPreferencias = [
     },
     {
         id: 'P13',
-        descricao: 'E fundamental que os colaboradores explorem, compartilhem e apliquem ativamente o conhecimento disponivel, colaborando para usar o conhecimento na organizacao para criar vantagens estrategicas diante das mudancas constantes.',
+        descricao: 'E fundamental que os colaboradores explorem, compartilhem e apliquem ativamente o conhecimento disponivel, contribuindo para usar o conhecimento na organizacao para criar vantagens estrategicas diante das mudancas constantes.',
         peso: 3
     },
     {
@@ -166,7 +166,7 @@ export const perguntasPreferencias = [
     },
     {
         id: 'P34',
-        descricao: 'E essencial que os gestores evidenciem a importancia do demandem o uso de dados para decisoes, reconhecam formalmente as praticas consideradas corretas e destinem recursos para capacitacao e infraestrutura necessarias.',
+        descricao: 'E essencial que os gestores evidenciem a importancia e demandem o uso de dados para decisoes, reconhecam formalmente as praticas consideradas corretas e destinem recursos para capacitacao e infraestrutura necessarias.',
         peso: 3
     },
     {
@@ -201,7 +201,7 @@ export const perguntasPreferencias = [
     },
     {
         id: 'P41',
-        descricao: 'A empresa deve destinar orcamento especifico para capacitacao e estruturar sistemas formais de aprendizagem, como bibliotecas de conhecimento, onde especialistas compartilhem suas experiencias e formalizem a aquisicao de novas competencias.',
+        descricao: 'A empresa deve destinada orcamento especifico para capacitacao e estruturar sistemas formais de aprendizagem, como bibliotecas de conhecimento, onde especialistas compartilhem suas experiencias e formalizem a aquisicao de novas competencias.',
         peso: 3
     },
     {
@@ -221,7 +221,7 @@ export const perguntasPreferencias = [
     },
     {
         id: 'P45',
-        descricao: 'A empresa deve medir e monitorar os resultados das iniciativas orientada a dados para aumentar a confianca nos dados e motivar os colaboradores, demonstrando os beneficios tangiveis do trabalho orientado por dados.',
+        descricao: 'A empresa deve medir e monitorar os resultados das iniciativas orientadas a dados para aumentar a confianca nos dados e motivar os colaboradores, demonstrando os beneficios tangiveis do trabalho orientado por dados.',
         peso: 3
     },
     {

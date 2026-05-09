@@ -19,6 +19,14 @@ const STEPS = [
         fase: 'Mais Importantes',
         titulo: 'Selecione as 10 mais importantes',
         descricao: 'Das 20 que voce escolheu, selecione as 10 que considera mais importantes de todas.',
+        required: 20,
+        source: 'all'
+    },
+    {
+        id: 'mais_10',
+        fase: 'Mais Importantes',
+        titulo: 'Selecione as 10 mais importantes',
+        descricao: 'Das 20 que voce escolheu, selecione as 10 que considera mais importantes de todas.',
         required: 10,
         source: 'mais20'
     },
