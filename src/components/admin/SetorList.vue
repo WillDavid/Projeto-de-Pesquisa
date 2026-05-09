@@ -390,4 +390,38 @@ export default {
     cursor: pointer;
     font-family: inherit;
 }
+
+@media (max-width: 768px) {
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .setor-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .setor-table th,
+    .setor-table td {
+        white-space: nowrap;
+        padding: 10px 12px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
 </style>

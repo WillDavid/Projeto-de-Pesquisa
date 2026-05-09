@@ -346,4 +346,56 @@ export default {
     font-style: italic;
     padding: 40px !important;
 }
+
+@media (max-width: 768px) {
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .back-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .generate-section {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .quantity-input {
+        width: 100%;
+    }
+
+    .quantity-input input {
+        width: 100%;
+    }
+
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .senha-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .senha-table th,
+    .senha-table td {
+        padding: 10px 12px;
+    }
+
+    .senha-cell {
+        letter-spacing: 1px;
+    }
+}
 </style>

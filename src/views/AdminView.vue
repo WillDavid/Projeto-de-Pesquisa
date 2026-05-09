@@ -371,13 +371,39 @@ export default {
         gap: 12px;
     }
 
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
     .header-actions {
         width: 100%;
         flex-wrap: wrap;
     }
 
+    .export-btn, .logout-btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+
     .admin-content {
-        padding: 20px;
+        padding: 16px;
+    }
+
+    .admin-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 1;
+        min-width: 140px;
+        justify-content: center;
+    }
+
+    .tab-content {
+        padding: 16px;
     }
 }
 </style>
