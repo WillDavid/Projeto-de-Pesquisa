@@ -29,17 +29,23 @@ export default {
 
             const { data: senhasData, error: senhasError } = await supabase
                 .from('senhas')
-                .select('setor_id');
+                .select('setor_id, formulario_opcoes_concluido, formulario_preferencias_concluido');
 
             if (!error && !senhasError) {
-                const counts = (senhasData || []).reduce((acc, item) => {
-                    acc[item.setor_id] = (acc[item.setor_id] || 0) + 1;
-                    return acc;
-                }, {});
+                const totalCounts = {};
+                const respondidasCounts = {};
+
+                for (const item of (senhasData || [])) {
+                    totalCounts[item.setor_id] = (totalCounts[item.setor_id] || 0) + 1;
+                    if (item.formulario_opcoes_concluido && item.formulario_preferencias_concluido) {
+                        respondidasCounts[item.setor_id] = (respondidasCounts[item.setor_id] || 0) + 1;
+                    }
+                }
 
                 this.setores = (data || []).map((setor) => ({
                     ...setor,
-                    quantidade_senhas: counts[setor.id] || 0
+                    senhas_respondidas: respondidasCounts[setor.id] || 0,
+                    quantidade_senhas: totalCounts[setor.id] || 0
                 }));
             }
             this.loading = false;
@@ -113,7 +119,7 @@ export default {
                 <tr>
                     <th>ID</th>
                     <th>Nome do Setor</th>
-                    <th>Senhas Criadas</th>
+                    <th>Senhas Respondidas</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -121,7 +127,7 @@ export default {
                 <tr v-for="setor in setores" :key="setor.id">
                     <td class="id-cell">{{ setor.id }}</td>
                     <td>{{ setor.nome }}</td>
-                    <td>{{ setor.quantidade_senhas }}</td>
+                    <td>{{ setor.senhas_respondidas }}/{{ setor.quantidade_senhas }}</td>
                     <td class="actions">
                         <button class="action-btn edit" @click="openModal(setor)">
                             Editar
