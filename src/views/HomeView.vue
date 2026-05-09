@@ -31,16 +31,6 @@ export default {
             </p>
 
             <div class="home-buttons">
-                <button class="home-btn admin-btn" @click="goToLoginAdmin">
-                    <span class="btn-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
-                    </span>
-                    Acesso Administrador
-                </button>
-
                 <button class="home-btn respondent-btn" @click="goToLoginRespondente">
                     <span class="btn-icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -52,11 +42,21 @@ export default {
                     </span>
                     Acesso Respondente
                 </button>
+
+                <button class="home-btn admin-btn" @click="goToLoginAdmin">
+                    <span class="btn-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </span>
+                    Acesso Administrador
+                </button>
             </div>
         </div>
 
         <footer class="home-footer">
-            <p>Desenvolvido por Dinardi Solucoes em Software</p>
+            <p>Desenvolvido por Dinardi Soluções em Software</p>
         </footer>
     </div>
 </template>
